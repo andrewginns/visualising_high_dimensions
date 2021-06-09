@@ -2,6 +2,8 @@
 
 This code respository explores different methods of taking high dimensional data and presenting it in a lower dimensional latent space.
 
+Visualisations use Plotly graph objects and a Dash web app interface.
+
 A number of different techniques will be explored:
 1. Truncated SVD
     * Taking the top eigenvectors by variance
