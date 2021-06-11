@@ -22,14 +22,14 @@ class Dashboard:
         # Create the components holding figures driven by callbacks
         figs = [go.Figure() for _ in range(0, 2)]
 
-        self.density_2d = dcc.Graph(id="density_2d",
+        self.density_2d = dcc.Graph(id='density_2d',
                             figure=plot_2d_density(
                                 self.data[self.latent_cols[0]],
                                 self.data[self.latent_cols[1]]
-                                )
+                                ),
                             )
 
-        self.table_inverse = dcc.Graph(id="table_inverse", figure=figs[1])
+        self.table_inverse = dcc.Graph(id='table_inverse', figure=figs[1])
         
         self.latent_vals = [
             dcc.Input(
@@ -44,32 +44,35 @@ class Dashboard:
         # HTML defined components of the visuals
         self.app.layout = html.Div(
             children=[
-                html.H1(children="Reduced dimensionality visualisation",),
+                html.H1(children='Reduced dimensionality visualisation',),
                 html.P(
-                    children="Displays a lower dimensional latent space projection"
-                    " as well as the original dimensional projection estimate.",
+                    children='Displays a lower dimensional latent space projection'
+                    'as well as the original dimensional projection estimate.',
                 ),
 
                 dbc.Col(
-                    html.Div(
+                    html.Center(
                         children=[self.density_2d],
-                    ),
+                    ), 
+                    style={'height': '750px'}
                 ),
                 
                 html.Label('Selected latent values, x and y'),
                 dbc.Col(
-                    html.Div(
+                    html.Center(
                         children=self.latent_vals,
                     ),
+                    style={'height': '50px'}
                 ),
                 
-                html.Label('Approximate original dimensionality values:'),
+                html.Label(f'Approximate original dimensionality values using {self.model.__class__.__name__}:'),
                 dbc.Col(
-                    html.Div(
+                    html.Center(
                         children=[self.table_inverse],
                     ),
+                    style={'height': '700px'}
                 ),
             ],
-            style={'columnCount': 2}
+            style={'height': '750px', 'columnCount': 2}
         )
 
